@@ -1,10 +1,14 @@
 :root {
     --my-header-color: rgb(106, 106, 255);
+    --light-background-color: rgb(36, 174, 192);
+    --dark-background-color: rgb(19, 31, 33);
+    color-scheme: light dark;
 }
 
 body {
     font-family: swansea, Helvetica, sans-serif;
-    background-color: lightblue;
+    /* background-color: lightblue; */
+    background-color: light-dark(var(--light-background-color, lightblue), var(--dark-background-color, black));
     font-size: 16px;
 }
 
@@ -97,7 +101,7 @@ header {
 
 
 footer {
-    border: 1px solid black;
+    border: 1px solid var(--light-background-color, lightblue);
     padding-top: 0.75rem;
     display: grid;
     grid-template-rows: 1fr 1fr 5fr;
@@ -182,8 +186,12 @@ form[id="feedback-form"] {
 
 @media (prefers-color-scheme: dark) {
     body {
-        background-color: black;
+        /* background-color: black; */
         color: white;
+    }
+
+    footer {
+        border-color: var(--dark-background-color, black);
     }
 
     nav.links a:hover {
