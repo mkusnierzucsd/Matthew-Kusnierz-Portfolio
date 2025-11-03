@@ -3,13 +3,17 @@
     --light-background-color: rgb(36, 174, 192);
     --dark-background-color: rgb(19, 31, 33);
 
+    --small-font: 12px;
+    --medium-font: 18px;
+    --large-font: 20px;
+
     color-scheme: light dark;
 }
 
 body {
     font-family: swansea, Helvetica, sans-serif;
     background-color: light-dark(var(--light-background-color, lightblue), var(--dark-background-color, black));
-    font-size: 12px;
+    font-size: var(--small-font, 12px);
     animation: fadeIn 0.8s ease-in;
 }
 
@@ -91,16 +95,24 @@ form#feedback-form {
     align-items: center; 
 }
 
+button {
+    size: 2em;
+}
+
 
 @media screen and (min-width: 600px) {
     body {
-        font-size: 18px;
+        font-size: var(--medium-font, 18px);
+    }
+
+    button {
+        font-size: 1.5em;
     }
 }
 
 @media screen and (min-width: 900px) {
     body {
-        font-size: 20px;
+        font-size: var(--large-font, 20px);
     }
 
     nav a {
@@ -168,6 +180,10 @@ form#feedback-form {
                 grid-row: 2 / 6;
             }
         }
+    }
+
+    button {
+        font-size: 0.5em;
     }
 }
 
