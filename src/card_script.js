@@ -1,8 +1,15 @@
 class ProjectCard extends HTMLElement {
     constructor() {
         super();
-
         this.attachShadow({ mode: "open" });
+    }
+
+    connectedCallback() {
+        const title = this.getAttribute("title");
+        const img = this.getAttribute("img");
+        const alt = this.getAttribute("alt");
+        const desc = this.getAttribute("desc");
+        const link = this.getAttribute("link");
 
         this.shadowRoot.innerHTML = `
         <style>
@@ -14,12 +21,12 @@ class ProjectCard extends HTMLElement {
             }
         </style>
 
-        <h2>My Cool Project</h2>
+        <h2>${title}</h2>
         <picture>
-            <img src="/assets/CAHousingProj.png" alt="Screenshot of My Cool Project" width="240">
+            <img src="${img}" alt="${alt}" width="280">
         </picture>
-        <p>A short description of my project.</p>
-        <a href="https://example.com">Learn More</a>
+        <p>${desc}</p>
+        <a href="${link}">Learn More</a>
         `;
     }
 }
