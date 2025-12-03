@@ -1,0 +1,18 @@
+:root {
+    --card-bg: white;
+    --card-radius: 10px;
+    --card-padding: 1rem;
+}
+
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 0.5fr));
+    gap: 1rem;
+}
+
+project-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
