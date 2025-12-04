@@ -92,3 +92,9 @@ document.getElementById("loadLocal").addEventListener("click", () => {
     const data = JSON.parse(json);
     renderCards(data);
 });
+
+document.getElementById("loadRemote").addEventListener("click", async() => {
+    const res = await fetch("https://my-json-server.typicode.com/mkusnierzucsd/Matthew-Kusnierz-Portfolio/remoteData");
+    const data = await res.json();
+    renderCards(data);
+});
