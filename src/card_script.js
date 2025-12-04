@@ -4,7 +4,19 @@ class ProjectCard extends HTMLElement {
         this.attachShadow({ mode: "open" });
     }
 
+    static get observedAttributes() {
+        return ["title", "img", "alt", "desc", "link"];
+    }
+
     connectedCallback() {
+        this.render();
+    }
+
+    attributeChangedCallback() {
+        this.render();
+    }
+
+    render() {
         const title = this.getAttribute("title");
         const img = this.getAttribute("img");
         const alt = this.getAttribute("alt");
@@ -23,10 +35,10 @@ class ProjectCard extends HTMLElement {
 
         <h2>${title}</h2>
         <picture>
-            <img src="${img}" alt="${alt}" width="280">
+            <img src="${img}" alt="${alt}" width="240px">
         </picture>
         <p>${desc}</p>
-        <a href="${link}">Learn More</a>
+        <a href="${link}">Learn more</a>
         `;
     }
 }
