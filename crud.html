@@ -31,6 +31,14 @@
                 <label>Link <input type="text" id="update-link"></label><br>
                 <button type="submit">Update Project</button>
             </form>
+
+            <h2>Delete a Project Card</h2>
+            <form id="delete-form">
+                <label>Enter the index of the project card you want to delete
+                    <input type="number" id="delete-index" min="0" required>
+                </label><br>
+                <button type="submit">Delete Project</button>
+            </form>
         </main>
         
         <script>
@@ -69,6 +77,21 @@
                     link: document.getElementById("update-link").value
                 };
 
+                localStorage.setItem("projects",JSON.stringify(projects));
+            });
+
+            document.getElementById("delete-form").addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                let projects = JSON.parse(localStorage.getItem("projects")) || [];
+                let index = parseInt(document.getElementById("delete-index").value);
+
+                if(index < 0 || index >= projects.length) {
+                    alert("Invalid index");
+                    return;
+                }
+
+                projects.splice(index,1);
                 localStorage.setItem("projects",JSON.stringify(projects));
             });
         </script>
