@@ -7,32 +7,70 @@
         <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" href="/src/styles.css" />
     </head>
-    <main>
-        <h1>CRUD Actions</h1>
-        <form id="crud-form">
-            <label>Title <input type="text" id="create-title" required></label><br>
-            <label>Image URL<input type="text" id="create-image" required></label><br>
-            <label>Alt Text <input type="text" id="create-alt" required></label><br>
-            <label>Description <input type="text" id="create-desc" required></label><br>
-            <label>Link <input type="text" id="create-link" required></label><br>
-            <button type="submit">Create Project Card</button>
-        </form>
-    </main>
-    <script>
-        document.getElementById("crud-form").addEventListener("submit", (e) => {
-            e.preventDefault();
+    <body>
+        <main>
+            <h2>Create a Project Card</h2>
+            <form id="create-form">
+                <label>Title <input type="text" id="create-title" required></label><br>
+                <label>Image URL<input type="text" id="create-img" required></label><br>
+                <label>Alt Text <input type="text" id="create-alt" required></label><br>
+                <label>Description <input type="text" id="create-desc" required></label><br>
+                <label>Link <input type="text" id="create-link" required></label><br>
+                <button type="submit">Create Project Card</button>
+            </form>
 
-            let projects = JSON.parse(localStorage.getItem("projects")) || [];
+            <h2>Update a Project Card</h2>
+            <form id="update-form">
+                <label>Enter the index of the project card you want to update
+                    <input type="number" id="update-index" min="0" required>
+                </label><br>
+                <label>Title <input type="text" id="update-title"></label><br>
+                <label>Image URL <input type="text" id="update-img"></label><br>
+                <label>Alt Text <input type="text" id="update-alt"></label><br>
+                <label>Description <input type="text" id="update-desc"></label><br>
+                <label>Link <input type="text" id="update-link"></label><br>
+                <button type="submit">Update Project</button>
+            </form>
+        </main>
+        
+        <script>
+            document.getElementById("create-form").addEventListener("submit", (e) => {
+                e.preventDefault();
 
-            const newProject = {
-                title: document.getElementById("create-title").value,
-                img: document.getElementById("create-image").value,
-                alt: document.getElementById("create-alt").value,
-                desc: document.getElementById("create-desc").value,
-                link: document.getElementById("create-link").value
-            };
-            projects.push(newProject);
-            localStorage.setItem("projects", JSON.stringify(projects));
-        });
-    </script>
+                let projects = JSON.parse(localStorage.getItem("projects")) || [];
+
+                const newProject = {
+                    title: document.getElementById("create-title").value,
+                    img: document.getElementById("create-img").value,
+                    alt: document.getElementById("create-alt").value,
+                    desc: document.getElementById("create-desc").value,
+                    link: document.getElementById("create-link").value
+                };
+                projects.push(newProject);
+                localStorage.setItem("projects", JSON.stringify(projects));
+            });
+
+            document.getElementById("update-form").addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                let projects = JSON.parse(localStorage.getItem("projects")) || [];
+                let index = parseInt(document.getElementById("update-index").value);
+
+                if(index < 0 || index >= projects.length) {
+                    alert("Invalid index");
+                    return;
+                }
+
+                projects[index] = {
+                    title: document.getElementById("update-title").value,
+                    img: document.getElementById("update-img").value,
+                    alt: document.getElementById("update-alt").value,
+                    desc: document.getElementById("update-desc").value,
+                    link: document.getElementById("update-link").value
+                };
+
+                localStorage.setItem("projects",JSON.stringify(projects));
+            });
+        </script>
+    </body>
 </html>
