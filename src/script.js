@@ -40,6 +40,9 @@ function setSavedTheme() {
         setTheme(savedTheme);
         document.getElementById("themeToggle").checked = (savedTheme === "dark");
     }
+    else {
+        setTheme("light");
+    }
 }
 
 document.addEventListener("DOMContentLoaded", setSavedTheme);
