@@ -87,14 +87,26 @@ function renderCards(dataArray) {
 
 localStorage.setItem("projects",JSON.stringify(localData));
 
-document.getElementById("loadLocal").addEventListener("click", () => {
-    const json = localStorage.getItem("projects");
-    const data = JSON.parse(json);
-    renderCards(data);
-});
+if(document.getElementById("loadLocal")) {
+    document.getElementById("loadLocal").addEventListener("click", () => {
+        const json = localStorage.getItem("projects");
+        const data = JSON.parse(json);
+        renderCards(data);
+    });
+}
+if(document.getElementById("loadRemote")) {
+    document.getElementById("loadRemote").addEventListener("click", async() => {
+        const res = await fetch("https://my-json-server.typicode.com/mkusnierzucsd/Matthew-Kusnierz-Portfolio/remoteData");
+        const data = await res.json();
+        renderCards(data);
+    });
+}
 
-document.getElementById("loadRemote").addEventListener("click", async() => {
-    const res = await fetch("https://my-json-server.typicode.com/mkusnierzucsd/Matthew-Kusnierz-Portfolio/remoteData");
-    const data = await res.json();
-    renderCards(data);
+document.addEventListener("DOMContentLoaded", () => {
+    const menuToggle = document.getElementById("menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    menuToggle.addEventListener("click", () => {
+        navLinks.classList.toggle("open");
+    });
 });
